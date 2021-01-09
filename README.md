@@ -2,12 +2,12 @@ https://jsonplaceholder.typicode.com is used as the server part.
 
 Includes:
 
-.get
-.post
-.delete
+1.  .get
+2.  .post
+3.  .delete
 
-1 example of avoiding infinite loop after a request
+4.  1 example of avoiding infinite loop after a request
 
-interceptors
-defaults
-axios instances
+5.  interceptors,
+6.  defaults
+7.  axios instances
