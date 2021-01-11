@@ -10,6 +10,10 @@ class NewPost extends Component {
         author: 'Max'
     }
 
+    componentDidMount() {
+        console.log(this.props);
+    }
+
     addPostHandler = () => {
         //axios will automatically stringify this
         const newPost = {...this.state};
