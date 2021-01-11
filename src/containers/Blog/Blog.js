@@ -18,7 +18,7 @@ class Blog extends Component {
                     <nav>
                         <ul>
                             <li><NavLink 
-                                to="/" 
+                                to="/posts" 
                                 exact
                                 //customizing the style. Requires NavLink instead of Link
                                 activeClassName="my-active"
@@ -40,9 +40,8 @@ class Blog extends Component {
                 </header>
                 <section className="Posts">
                     <Switch>
-                        <Route path="/" exact component={Posts}/>
                         <Route path="/new-post" component={NewPost}/>
-                        <Route path="/:id" exact component={FullPost}/>
+                        <Route path="/posts" component={Posts}/>
                     </Switch>
                 </section>
             </div>
