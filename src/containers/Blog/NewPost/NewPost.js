@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import {Redirect}           from 'react-router-dom';
+
+import axios                from 'axios';
 
 import './NewPost.css';
 
@@ -10,7 +12,7 @@ class NewPost extends Component {
         author: 'Max'
     }
 
-    componentDidMount() {
+    componentDidMount() { 
         console.log(this.props);
     }
 
@@ -18,24 +20,24 @@ class NewPost extends Component {
         //axios will automatically stringify this
         const newPost = {...this.state};
         axios.post("https://jsonplaceholder.typicode.com/posts", newPost)
-            .then(response => console.log(response.data));
+            .then(response => this.props.history.replace("/posts"));
     }
 
     render () {
         return (
-            <div className="NewPost">
-                <h1>Add a Post</h1>
-                <label>Title</label>
-                <input type="text" value={this.state.title} onChange={(event) => this.setState({title: event.target.value})} />
-                <label>Content</label>
-                <textarea rows="4" value={this.state.content} onChange={(event) => this.setState({content: event.target.value})} />
-                <label>Author</label>
-                <select value={this.state.author} onChange={(event) => this.setState({author: event.target.value})}>
-                    <option value="Max">Max</option>
-                    <option value="Manu">Manu</option>
-                </select>
-                <button onClick={this.addPostHandler}>Add Post</button>
-            </div>
+                <div className="NewPost">
+                    <h1>Add a Post</h1>
+                    <label>Title</label>
+                    <input type="text" value={this.state.title} onChange={(event) => this.setState({title: event.target.value})} />
+                    <label>Content</label>
+                    <textarea rows="4" value={this.state.content} onChange={(event) => this.setState({content: event.target.value})} />
+                    <label>Author</label>
+                    <select value={this.state.author} onChange={(event) => this.setState({author: event.target.value})}>
+                        <option value="Max">Max</option>
+                        <option value="Manu">Manu</option>
+                    </select>
+                    <button onClick={this.addPostHandler}>Add Post</button>
+                </div>
         );
     }
 }
