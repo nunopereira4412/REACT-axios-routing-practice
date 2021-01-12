@@ -1,15 +1,16 @@
-import React, { Component} from 'react';
+import React, { Component, Suspense}  from 'react';
 import axios                from '../../axios';
 import {Route, NavLink, Switch, Redirect}       from 'react-router-dom';
 
 import Posts                from './Posts/Posts';
-// import NewPost              from './NewPost/NewPost';
 import FullPost             from './FullPost/FullPost';
-import asyncComponent       from '../../hoc/asyncComponent';
+// import NewPost              from './NewPost/NewPost';
+// import asyncComponent       from '../../hoc/asyncComponent';
 
 import './Blog.css';
 
-const asyncNewPost = asyncComponent(() => import('./NewPost/NewPost'));
+// const asyncNewPost = asyncComponent(() => import('./NewPost/NewPost'));
+const Post = React.lazy(() => import('./NewPost/NewPost'));
 
 class Blog extends Component {
  
@@ -43,7 +44,15 @@ class Blog extends Component {
                 <section className="Posts">
                     <Switch>
                         {/* <Route path="/new-post" component={NewPost}/> */}
-                        <Route path="/new-post" component={asyncNewPost}/>
+
+                        {/* <Route path="/new-post" component={asyncNewPost}/> */}
+
+                        <Route path="/new-post" render={() => (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <Post/>
+                            </Suspense>
+                        )}/>
+
                         <Route path="/posts" component={Posts}/>
                         <Route render={() => <h1>Not Found</h1>}/>
                         <Redirect from="/" to="/posts"/>
