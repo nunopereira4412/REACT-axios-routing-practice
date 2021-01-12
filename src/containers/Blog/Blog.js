@@ -3,18 +3,16 @@ import axios                from '../../axios';
 import {Route, NavLink, Switch, Redirect}       from 'react-router-dom';
 
 import Posts                from './Posts/Posts';
-import NewPost              from './NewPost/NewPost';
+// import NewPost              from './NewPost/NewPost';
 import FullPost             from './FullPost/FullPost';
+import asyncComponent       from '../../hoc/asyncComponent';
 
 import './Blog.css';
 
+const asyncNewPost = asyncComponent(() => import('./NewPost/NewPost'));
 
 class Blog extends Component {
  
-    state = {
-        userAuthenticated: false
-    }
-
     render () {
         return (
             <div className="Blog">
@@ -44,8 +42,10 @@ class Blog extends Component {
                 </header>
                 <section className="Posts">
                     <Switch>
-                        {this.state.userAuthenticated ? <Route path="/new-post" component={NewPost}/> : null}
+                        {/* <Route path="/new-post" component={NewPost}/> */}
+                        <Route path="/new-post" component={asyncNewPost}/>
                         <Route path="/posts" component={Posts}/>
+                        <Route render={() => <h1>Not Found</h1>}/>
                         <Redirect from="/" to="/posts"/>
                     </Switch>
                 </section>
