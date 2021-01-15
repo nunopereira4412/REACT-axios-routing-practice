@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {Redirect}           from 'react-router-dom';
+import React, { Component} from 'react';
+import {Redirect, withRouter }           from 'react-router-dom';
 
 import axios                from 'axios';
 
@@ -20,10 +20,11 @@ class NewPost extends Component {
         //axios will automatically stringify this
         const newPost = {...this.state};
         axios.post("https://jsonplaceholder.typicode.com/posts", newPost)
-            .then(response => this.props.history.replace("/posts"));
+        .then(response => this.props.history.replace("/posts"));
     }
 
     render () {
+        console.log(this.props);
         return (
                 <div className="NewPost">
                     <h1>Add a Post</h1>
@@ -42,4 +43,4 @@ class NewPost extends Component {
     }
 }
 
-export default NewPost;
+export default withRouter(NewPost);
